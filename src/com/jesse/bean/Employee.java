@@ -9,7 +9,8 @@ import java.util.Date;
  * Created by public1 on 2017/6/21.
  */
 public class Employee implements Serializable {
-    private Integer id;
+
+    private Integer id;//id
     private Dept dept;//员工关联的部门对象
     private Job job;//员工关联的职位对象
     private String name;//名称

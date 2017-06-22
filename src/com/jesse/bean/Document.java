@@ -15,6 +15,7 @@ public class Document implements Serializable {
     private MultipartFile file;//文件
     private String remark;//描述
     private Date create_date;//上传时间
+    private User user;
 
     public int getId() {
         return id;
@@ -62,5 +63,13 @@ public class Document implements Serializable {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

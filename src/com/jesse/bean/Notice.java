@@ -10,7 +10,8 @@ public class Notice implements Serializable {
     private Integer id;//编号
     private String title;//标题
     private String content;//内容
-    private Date create_date;//发布人
+    private Date create_date;//发布日期
+    private User user;
 
     public Integer getId() {
         return id;
@@ -42,5 +43,13 @@ public class Notice implements Serializable {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

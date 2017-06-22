@@ -71,7 +71,7 @@ public class UserDynaSqlProvider {
         }.toString();
     }
 
-    //动态插入
+    //动态更新
     public String updateUser(User user){
         return new SQL(){
             {
@@ -79,14 +79,17 @@ public class UserDynaSqlProvider {
                 if(user.getUsername()!=null){
                     SET(" username= #{username} ");
                 }
-                if(user.getStatus()!=null && !user.getStatus().equals("")){
-                    SET(" status= #{status} ");
-                }
-                if(user.getLoginname()!=null && !user.getLoginname().equals("")){
+                if(user.getLoginname()!=null){
                     SET(" loginname= #{loginname} ");
                 }
-                if(user.getPassword()!=null && !user.getPassword().equals("")){
+                if(user.getPassword()!=null){
                     SET(" password= #{password} ");
+                }
+                if(user.getStatus()!=null){
+                    SET(" status= #{status} ");
+                }
+                if(user.getCreate_date()!=null){
+                    SET(" create_date= #{create_date} ");
                 }
                 WHERE(" id=#{id} ");
             }
