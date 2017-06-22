@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by public1 on 2017/6/22.
@@ -37,8 +38,15 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     @Override
     public List<User> findUser(User user, PageModel pageModel) {
-
-        return null;
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("user",user);
+        int recordCount=userDao.count(params);
+        pageModel.setRecordCount(recordCount);
+        if(recordCount>0){
+            params.put("pageModel",pageModel);
+        }
+        List<User> users=userDao.selectByPage(params);
+        return users;
     }
 
     @Override

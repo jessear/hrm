@@ -20,5 +20,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ant-1.9.6" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="javax.annotation" level="project" />
+    <orderEntry type="library" name="javax.transaction" level="project" />
   </component>
 </module>
