@@ -1,16 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: public1
-  Date: 2017/6/21
-  Time: 16:33
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!-- 立即请求/main -->
+<jsp:forward page="/WEB-INF/jsp/main.jsp"/>

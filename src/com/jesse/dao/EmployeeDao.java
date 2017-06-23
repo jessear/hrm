@@ -3,7 +3,6 @@ package com.jesse.dao;
 
 import com.jesse.bean.Employee;
 import com.jesse.provider.EmployeeDynaSqlProvider;
-import com.jesse.provider.JobDynaSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 import java.util.List;
@@ -35,7 +34,7 @@ public interface EmployeeDao {
     })
     List<Employee> selectByPage(Map<String, Object> params);
     //动态插入部门
-    @InsertProvider(type=EmployeeDynaSqlProvider.class,method = "insertJob")
+    @InsertProvider(type=EmployeeDynaSqlProvider.class,method = "insertEmployee")
     void save(Employee employee);
     @Delete("delete from "+EMPLOYEETABLE+" where id = #{id}")
     void deleteById(int id);
@@ -56,6 +55,6 @@ public interface EmployeeDao {
     })
     Employee selectById(int id);
     //动态修改部门
-    @UpdateProvider(type=JobDynaSqlProvider.class,method = "updateJob")
+    @UpdateProvider(type=EmployeeDynaSqlProvider.class,method = "updateEmployee")
     void update(Employee employee);
 }
