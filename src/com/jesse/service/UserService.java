@@ -25,7 +25,7 @@ public interface UserService {
     User findUserById(Integer id);
 
     /**
-     * 获取所有用户
+     * 分页获取所有用户
      * @param user
      * @param pageModel
      * @return

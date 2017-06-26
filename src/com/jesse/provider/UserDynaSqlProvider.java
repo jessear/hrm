@@ -67,6 +67,8 @@ public class UserDynaSqlProvider {
                 if(user.getPassword()!=null && !user.getPassword().equals("")){
                     VALUES("password","#{password}");
                 }
+
+                VALUES("create_date","NOW()");
             }
         }.toString();
     }

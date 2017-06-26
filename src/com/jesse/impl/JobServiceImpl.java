@@ -27,7 +27,7 @@ public class JobServiceImpl implements JobService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Job> findDept(Job job, PageModel pageModel) {
+    public List<Job> findJob(Job job, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("job",job);
         int recordCount=jobDao.count(params);
@@ -45,12 +45,12 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void removeJobzById(Integer id) {
+    public void removeJobById(Integer id) {
         jobDao.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
-    public Job findDeptById(Integer id) {
+    public Job findJobById(Integer id) {
         return jobDao.selectById(id);
     }
 

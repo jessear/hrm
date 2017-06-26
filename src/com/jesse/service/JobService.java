@@ -16,7 +16,7 @@ public interface JobService {
      * @param pageModel
      * @return
      */
-    List<Job> findDept(Job job, PageModel pageModel);
+    List<Job> findJob(Job job, PageModel pageModel);
 
     /**
      * 获取所有职位
@@ -28,14 +28,14 @@ public interface JobService {
      * 根据id删除职位
      * @param id
      */
-    void removeJobzById(Integer id);
+    void removeJobById(Integer id);
 
     /**
      * 根据id查询职位
      * @param id
      * @return
      */
-    Job findDeptById(Integer id);
+    Job findJobById(Integer id);
 
     /**
      * 添加职位
