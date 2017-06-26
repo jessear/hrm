@@ -163,7 +163,7 @@
 					  <td>${employee.dept.name }</td>
 					  <td>${employee.address }</td>
 					  <td>
-					  	<f:formatDate value="${employee.createDate}" 
+					  	<f:formatDate value="${employee.create_date}"
 								type="date" dateStyle="long"/>
 					  </td>
 					  <td align="center" width="40px;"><a href="${ctx}/employee/updateEmployee?flag=1&id=${employee.id}">
