@@ -64,6 +64,8 @@ public class NoticeDynaSqlProvider {
                 if(notice.getUser()!=null && notice.getUser().getId()!=null){
                     VALUES("user_id","#{user.id}");
                 }
+
+                VALUES("create_date","NOW()");
             }
         }.toString();
     }

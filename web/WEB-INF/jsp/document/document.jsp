@@ -150,7 +150,7 @@
 					<td><input type="checkbox" id="box_${stat.index}" value="${document.id}"></td>
 					 <td>${document.title }</td>
 					 <td>
-					  	<f:formatDate value="${document.createDate}" 
+					  	<f:formatDate value="${document.create_date}"
 								type="date" dateStyle="long"/>
 					  </td>
 					  <td>${document.user.username }</td>

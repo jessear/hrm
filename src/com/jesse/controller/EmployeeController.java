@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -61,6 +62,67 @@ public class EmployeeController {
         model.addAttribute("depts",depts);
         model.addAttribute("pageModel",pageModel);
         return "employee/employee";
+    }
+
+    @RequestMapping(value = "/employee/addEmployee")
+    public ModelAndView addEmployee(
+            String flag,
+            Integer job_id,Integer dept_id,
+            @ModelAttribute Employee employee,
+            ModelAndView modelAndView){
+        if(flag.equals("1")){
+            //查询职位信息
+            List<Job> jobs=jobService.findAllJob();
+            //查询部门信息
+            List<Dept> depts=deptService.findAllDept();
+            modelAndView.addObject("jobs",jobs);
+            modelAndView.addObject("depts",depts);
+            modelAndView.setViewName("employee/showAddEmployee");
+        }else{
+            this.genericAssociation(job_id,dept_id,employee);
+            employeeService.addEmployee(employee);
+            modelAndView.setViewName("redirect:/employee/selectEmployee");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 删除员工
+     * @param ids
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping(value = "/employee/removeEmployee")
+    public ModelAndView removeEmployee(String ids,ModelAndView modelAndView){
+        String[] idArray=ids.split(",");
+        for(String id :idArray){
+            employeeService.removeEmployeeById(Integer.parseInt(id));
+        }
+        modelAndView.setViewName("redirect:/employee/selectEmployee");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/employee/updateEmployee")
+    public ModelAndView updateEmployee(String flag,
+                                       Integer job_id,Integer dept_id,
+                                       @ModelAttribute Employee employee,
+                                       ModelAndView modelAndView){
+        if(flag.equals("1")){
+            Employee target=employeeService.findEmployeeById(employee.getId());
+            //需要查询的职位信息
+            List<Job> jobs=jobService.findAllJob();
+            //需要查询的部门信息
+            List<Dept> depts=deptService.findAllDept();
+            modelAndView.addObject("jobs",jobs);
+            modelAndView.addObject("depts",depts);
+            modelAndView.addObject("employee",target);
+            modelAndView.setViewName("employee/showUpdateEmployee");
+        }else{
+            this.genericAssociation(job_id,dept_id,employee);
+            employeeService.modifyEmployee(employee);
+            modelAndView.setViewName("redirect:/employee/selectEmployee");
+        }
+        return modelAndView;
     }
 
     /**

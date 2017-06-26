@@ -119,7 +119,7 @@ public class EmployeeDynaSqlProvider {
                     VALUES("education","#{education}");
                 }
                 if(employee.getSpeciality()!=null){
-                    VALUES("specicaity","#{specicaity}");
+                    VALUES("speciality","#{speciality}");
                 }
                 if(employee.getHobby()!=null){
                     VALUES("hobby","#{hobby}");
@@ -127,9 +127,7 @@ public class EmployeeDynaSqlProvider {
                 if(employee.getRemark()!=null){
                     VALUES("remark","#{remark}");
                 }
-                if(employee.getCreate_date()!=null){
-                    VALUES("create_date","#{create_date}");
-                }
+                VALUES("create_date","NOW()");
                 if(employee.getDept()!=null){
                     VALUES("dept_id","#{dept.id}");
                 }
@@ -185,7 +183,7 @@ public class EmployeeDynaSqlProvider {
                     SET("education = #{education}");
                 }
                 if(employee.getSpeciality()!=null){
-                    SET("specicaity = #{specicaity}");
+                    SET("speciality = #{speciality}");
                 }
                 if(employee.getHobby()!=null){
                     SET("hobby = #{hobby}");

@@ -138,7 +138,7 @@
 					 <td>${notice.title }</td>
 					  <td>${notice.content }</td>
 					  <td>
-					  <f:formatDate value="${notice.createDate}" 
+					  <f:formatDate value="${notice.create_date}"
 								type="date" dateStyle="long"/>
 					  </td>
 					  <td>${notice.user.username }</td>

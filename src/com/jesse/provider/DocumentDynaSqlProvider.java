@@ -56,7 +56,7 @@ public class DocumentDynaSqlProvider {
                 if(document.getTitle()!=null && !document.getTitle().equals("")){
                     VALUES("title","#{title}");
                 }
-                if(document.getFileName()!=null && !document.getFileName().equals("")){
+                if(document.getFilename()!=null && !document.getFilename().equals("")){
                     VALUES("filename","#{filename}");
                 }
                 if(document.getRemark()!=null && !document.getRemark().equals("")){
@@ -65,6 +65,7 @@ public class DocumentDynaSqlProvider {
                 if(document.getUser()!=null && document.getUser().getId()!=null){
                     VALUES("user_id","#{user.id}");
                 }
+                VALUES("create_date","NOW()");
             }
         }.toString();
     }
@@ -77,7 +78,7 @@ public class DocumentDynaSqlProvider {
                 if(document.getTitle()!=null && !document.getTitle().equals("")){
                     SET(" title= #{title} ");
                 }
-                if(document.getFileName()!=null && !document.getFileName().equals("")){
+                if(document.getFilename()!=null && !document.getFilename().equals("")){
                     SET(" filename= #{filename} ");
                 }
                 if(document.getRemark()!=null && !document.getRemark().equals("")){

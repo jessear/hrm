@@ -5,6 +5,9 @@ import com.jesse.dao.NoticeDao;
 import com.jesse.service.NoticeService;
 import com.jesse.util.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +16,8 @@ import java.util.Map;
 /**
  * Created by Jesse on 2017/6/22 0022.
  */
+@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+@Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
     /**
      * 自动注入持久层dao对象
