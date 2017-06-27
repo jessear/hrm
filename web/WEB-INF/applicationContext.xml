@@ -39,8 +39,7 @@
 	
 	<!-- JDBC事务管理器 -->
 	<bean id="transactionManager" 
-	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		 p:dataSource-ref="dataSource"/>
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
 	
 	<!-- 启用支持annotation注解方式事务管理 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
