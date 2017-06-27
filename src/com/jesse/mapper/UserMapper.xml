@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指用户自定义的命名空间。 -->
+<mapper namespace="com.jesse.mapper.UserMapper">
+
+	<!-- 根据id查询Person，返回resultMap -->
+  <select id="selectByLoginnameAndPassword" parameterType="hashmap" resultMap="com.jesse.bean.User">
+  	SELECT * from user_inf where loginname=#{loginname} and password=#{password}
+  </select>
+
+</mapper>
