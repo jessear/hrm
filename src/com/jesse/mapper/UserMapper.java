@@ -1,13 +1,8 @@
 package com.jesse.mapper;
 
 import com.jesse.bean.User;
-import com.jesse.provider.UserDynaSqlProvider;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 import java.util.Map;
-
-import static com.jesse.common.HrmConstants.USERTABLE;
 
 /**
  * Created by public1 on 2017/6/21.

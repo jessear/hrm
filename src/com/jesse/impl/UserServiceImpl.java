@@ -1,14 +1,14 @@
 package com.jesse.impl;
 
 import com.jesse.bean.User;
-import com.jesse.dao.UserDao;
+import com.jesse.mapper.UserMapper;
 import com.jesse.service.UserService;
 import com.jesse.util.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,48 +19,46 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    /**
-     * 自动注入持久层dao对象
-     */
-    @Autowired
-    private UserDao userDao;
+
+    @Resource
+    UserMapper userMapper;
     @Transactional(readOnly = true)
     @Override
     public User login(String loginname, String password) {
-
-        return userDao.selectByLoginnameAndPassword(loginname,password);
+        return userMapper.selectByLoginnameAndPassword(loginname,password);
     }
+
     @Transactional(readOnly = true)
     @Override
     public User findUserById(Integer id) {
-        return userDao.selectById(id);
+        return userMapper.selectById(id);
     }
     @Transactional(readOnly = true)
     @Override
     public List<User> findUser(User user, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("user",user);
-        int recordCount=userDao.count(params);
+        int recordCount=userMapper.count(params);
         pageModel.setRecordCount(recordCount);
         if(recordCount>0){
             params.put("pageModel",pageModel);
         }
-        List<User> users=userDao.selectByPage(params);
+        List<User> users=userMapper.selectByPage(params);
         return users;
     }
 
     @Override
     public void removeUserById(Integer id) {
-        userDao.deleteById(id);
+        userMapper.deleteById(id);
     }
 
     @Override
     public void modifyUserById(User user) {
-        userDao.update(user);
+        userMapper.update(user);
     }
 
     @Override
     public void addUser(User user) {
-        userDao.save(user);
+        userMapper.save(user);
     }
 }
