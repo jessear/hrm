@@ -28,7 +28,7 @@
         where id=#{id}
     </update>
 
-    <select id="selectByPage" parameterType="hashmap" resultType="com.jesse.bean.User">
+    <select id="selectByPage" parameterType="hashmap" resultMap="userMap">
         select * from user_inf
         <where>
             <if test="user != null">
@@ -40,7 +40,19 @@
                 </if>
             </if>
         </where>
+        <if test="pageModel != null">
+            limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+        </if>
     </select>
+
+    <resultMap id="userMap" type="com.jesse.bean.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="loginname" property="loginname" />
+        <result column="password" property="password" />
+        <result column="status" property="status" />
+        <result column="create_date" property="create_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
     <select id="count" parameterType="hashmap" resultType="java.lang.Integer">
         select count(*) from user_inf
