@@ -32,11 +32,14 @@
 	<!-- 配置SqlSessionFactory，org.mybatis.spring.SqlSessionFactoryBean是Mybatis社区开发用于整合Spring的bean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 	    p:dataSource-ref="dataSource"/>
+
+	<!-- spring与mybatis整合配置，扫描所有dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.jesse.dao"
+		  p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 	
 	<!-- JDBC事务管理器 -->
 	<bean id="transactionManager" 
-	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		 p:dataSource-ref="dataSource"/>
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
 	
 	<!-- 启用支持annotation注解方式事务管理 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
