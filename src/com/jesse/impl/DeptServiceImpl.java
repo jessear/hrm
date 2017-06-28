@@ -1,14 +1,14 @@
 package com.jesse.impl;
 
 import com.jesse.bean.Dept;
-import com.jesse.dao.DeptDao;
+import com.jesse.mapper.DeptMapper;
 import com.jesse.service.DeptService;
 import com.jesse.util.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,48 +19,46 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
 @Service("deptService")
 public class DeptServiceImpl implements DeptService {
-    /**
-     * 自动注入持久层dao对象
-     */
-    @Autowired
-    DeptDao deptDao;
+
+    @Resource
+    DeptMapper deptMapper;
 
     @Transactional(readOnly = true)
     @Override
     public List<Dept> findDept(Dept dept, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("dept",dept);
-        int recordCount=deptDao.count(params);
+        int recordCount=deptMapper.count(params);
         pageModel.setRecordCount(recordCount);
         if(recordCount>0){
             params.put("pageModel",pageModel);
         }
-        List<Dept> depts=deptDao.selectByPage(params);
+        List<Dept> depts=deptMapper.selectByPage(params);
         return depts;
     }
     @Transactional(readOnly = true)
     @Override
     public List<Dept> findAllDept() {
-        return deptDao.selectAllDept();
+        return deptMapper.selectAllDept();
     }
 
     @Override
     public void removeDeptById(Integer id) {
-        deptDao.deleteById(id);
+        deptMapper.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
     public Dept findDeptById(Integer id) {
-        return deptDao.selectById(id);
+        return deptMapper.selectById(id);
     }
 
     @Override
     public void addDept(Dept dept) {
-        deptDao.save(dept);
+        deptMapper.save(dept);
     }
 
     @Override
     public void modifyDept(Dept dept) {
-        deptDao.update(dept);
+        deptMapper.update(dept);
     }
 }

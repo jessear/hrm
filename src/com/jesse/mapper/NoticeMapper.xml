@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指用户自定义的命名空间。 -->
+<mapper namespace="com.jesse.mapper.NoticeMapper">
+
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.Notice">
+        select * from notice_inf where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from notice_inf where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.jesse.bean.Notice">
+        update notice_inf
+        <set>
+            <if test="title != null">title= #{title},</if>
+            <if test="content != null">content= #{content},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="selectByPage" parameterType="hashmap" resultMap="noticeMap">
+        select * from notice_inf
+        <where>
+            <if test="notice != null">
+                <if test="notice.title != null and notice.title !=''">
+                    title LIKE CONCAT ('%',#{notice.title},'%')
+                </if>
+                <if test="notice.content != null and notice.content !=''">
+                    and content LIKE CONCAT ('%',#{notice.content},'%')
+                </if>
+            </if>
+        </where>
+        <if test="pageModel != null">
+            limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+        </if>
+    </select>
+
+    <resultMap id="noticeMap" type="com.jesse.bean.Notice">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="create_date" property="create_date" jdbcType="TIMESTAMP"/>
+        <association property="user" column="user_id"
+                     select="com.jesse.mapper.UserMapper.selectById"
+                     javaType="com.jesse.bean.User"
+        ></association>
+    </resultMap>
+
+    <select id="count" parameterType="hashmap" resultType="java.lang.Integer">
+        select count(*) from notice_inf
+        <where>
+            <if test="notice != null">
+                <if test="notice.title != null and notice.title !=''">
+                    title LIKE CONCAT ('%',#{notice.title},'%')
+                </if>
+                <if test="notice.content != null and notice.content !=''">
+                    and content LIKE CONCAT ('%',#{notice.content},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.jesse.bean.Notice">
+        insert into notice_inf <include refid="insertNotice"/>
+    </insert>
+
+    <sql id="insertNotice">
+        <set>
+            <if test="title != null">title= #{title},</if>
+            <if test="content != null">content= #{content},</if>
+            <if test="user != null and user.id != null">
+                user_id=#{user.id},
+            </if>
+            create_date=NOW()
+        </set>
+    </sql>
+
+</mapper>

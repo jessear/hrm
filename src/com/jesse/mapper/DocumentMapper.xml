@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指用户自定义的命名空间。 -->
+<mapper namespace="com.jesse.mapper.DocumentMapper">
+
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.Document">
+        select * from document_inf where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from document_inf where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.jesse.bean.Document">
+        update document_inf
+        <set>
+            <if test="title != null">title= #{title},</if>
+            <if test="filename != null">filename= #{filename},</if>
+            <if test="remark != null">remark= #{remark},</if>
+            <if test="user != null and user.id != null">
+                user_id=#{user.id},
+            </if>
+            <if test="create_date != null">create_date= #{create_date}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="selectByPage" parameterType="hashmap" resultMap="documentMap">
+        select * from document_inf
+        <where>
+            <if test="document != null">
+                <if test="document.title != null">
+                    title LIKE CONCAT ('%',#{document.title},'%')
+                </if>
+            </if>
+        </where>
+        <if test="pageModel != null">
+            limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+        </if>
+    </select>
+
+    <resultMap id="documentMap" type="com.jesse.bean.Document">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="filename" property="filename" />
+        <result column="remark" property="remark" />
+        <result column="create_date" property="create_date" jdbcType="TIMESTAMP"/>
+        <association property="user" column="user_id"
+        select="com.jesse.mapper.UserMapper.selectById" javaType="com.jesse.bean.User" />
+    </resultMap>
+
+    <select id="count" parameterType="hashmap" resultType="java.lang.Integer">
+        select count(*) from document_inf
+        <where>
+            <if test="document != null">
+                <if test="document.title != null">
+                    title LIKE CONCAT ('%',#{document.title},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.jesse.bean.Document">
+        insert into document_inf <include refid="insertDocument"/>
+    </insert>
+
+    <sql id="insertDocument">
+        <set>
+            <if test="title != null">title= #{title},</if>
+            <if test="filename != null">filename= #{filename},</if>
+            <if test="remark != null">remark= #{remark},</if>
+            <if test="user != null and user.id != null">
+                user_id=#{user.id},
+            </if>
+            create_date=NOW()
+        </set>
+    </sql>
+
+</mapper>

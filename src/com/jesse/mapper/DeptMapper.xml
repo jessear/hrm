@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指用户自定义的命名空间。 -->
+<mapper namespace="com.jesse.mapper.DeptMapper">
+
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.Dept">
+        select * from dept_inf where id=#{id}
+    </select>
+
+    <select id="selectAllDept" resultType="com.jesse.bean.Job">
+        select * from dept_inf
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from dept_inf where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.jesse.bean.Dept">
+        update dept_inf
+        <set>
+            <if test="name != null"> name= #{name},</if>
+            <if test="remark != null">remark= #{remark},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="selectByPage" parameterType="hashmap" resultType="com.jesse.bean.Dept">
+        select * from dept_inf
+            <if test="dept != null">
+                <if test="dept.name != null and dept.name !=''">
+                    where name LIKE CONCAT ('%',#{dept.name},'%')
+                </if>
+            </if>
+            <if test="pageModel != null">
+                limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+            </if>
+    </select>
+
+    <select id="count" parameterType="hashmap" resultType="java.lang.Integer">
+        select count(*) from dept_inf
+        <if test="dept != null">
+            <if test="dept.name != null and dept.name !=''">
+                where name LIKE CONCAT ('%',#{dept.name},'%')
+            </if>
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.jesse.bean.Dept">
+        insert into dept_inf <include refid="insertDept"/>
+    </insert>
+
+    <sql id="insertDept">
+        <set>
+            <if test="name != null">name= #{name},</if>
+            <if test="remark != null">remark= #{remark}</if>
+        </set>
+    </sql>
+
+</mapper>

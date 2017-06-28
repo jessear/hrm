@@ -2,6 +2,7 @@ package com.jesse.impl;
 
 import com.jesse.bean.Employee;
 import com.jesse.dao.EmployeeDao;
+import com.jesse.mapper.EmployeeMapper;
 import com.jesse.service.EmployeeService;
 import com.jesse.util.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,43 +22,41 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService {
-    /**
-     * 自动注入持久层dao对象
-     */
-    @Autowired
-    EmployeeDao employeeDao;
+
+    @Resource
+    EmployeeMapper employeeMapper;
 
     @Transactional(readOnly = true)
     @Override
     public List<Employee> findEmployee(Employee employee, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("employee",employee);
-        int recordCount=employeeDao.count(params);
+        int recordCount=employeeMapper.count(params);
         pageModel.setRecordCount(recordCount);
         if(recordCount>0){
             params.put("pageModel",pageModel);
         }
-        List<Employee> employees=employeeDao.selectByPage(params);
+        List<Employee> employees=employeeMapper.selectByPage(params);
         return employees;
     }
 
     @Override
     public void removeEmployeeById(Integer id) {
-        employeeDao.deleteById(id);
+        employeeMapper.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
     public Employee findEmployeeById(Integer id) {
-        return employeeDao.selectById(id);
+        return employeeMapper.selectById(id);
     }
 
     @Override
     public void addEmployee(Employee employee) {
-        employeeDao.save(employee);
+        employeeMapper.save(employee);
     }
 
     @Override
     public void modifyEmployee(Employee employee) {
-        employeeDao.update(employee);
+        employeeMapper.update(employee);
     }
 }

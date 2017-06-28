@@ -1,14 +1,14 @@
 package com.jesse.impl;
 
 import com.jesse.bean.Job;
-import com.jesse.dao.JobDao;
+import com.jesse.mapper.JobMapper;
 import com.jesse.service.JobService;
 import com.jesse.util.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,49 +19,47 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
 @Service("jobService")
 public class JobServiceImpl implements JobService {
-    /**
-     * 自动注入持久层dao对象
-     */
-    @Autowired
-    JobDao jobDao;
+
+    @Resource
+    JobMapper jobMapper;
 
     @Transactional(readOnly = true)
     @Override
     public List<Job> findJob(Job job, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("job",job);
-        int recordCount=jobDao.count(params);
+        int recordCount=jobMapper.count(params);
         pageModel.setRecordCount(recordCount);
         if(recordCount>0){
             params.put("pageModel",pageModel);
         }
-        List<Job> jobs=jobDao.selectByPage(params);
+        List<Job> jobs=jobMapper.selectByPage(params);
         return jobs;
     }
     @Transactional(readOnly = true)
     @Override
     public List<Job> findAllJob() {
-        return jobDao.selectAllJob();
+        return jobMapper.selectAllJob();
     }
 
     @Override
     public void removeJobById(Integer id) {
-        jobDao.deleteById(id);
+        jobMapper.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
     public Job findJobById(Integer id) {
-        return jobDao.selectById(id);
+        return jobMapper.selectById(id);
     }
 
     @Override
     public void addJob(Job job) {
-        jobDao.save(job);
+        jobMapper.save(job);
     }
 
     @Override
     public void modifyJob(Job job) {
-        jobDao.update(job);
+        jobMapper.update(job);
     }
 
 }
