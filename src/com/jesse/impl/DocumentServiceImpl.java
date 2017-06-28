@@ -2,11 +2,9 @@ package com.jesse.impl;
 
 
 import com.jesse.bean.Document;
-import com.jesse.dao.DocumentDao;
 import com.jesse.mapper.DocumentMapper;
 import com.jesse.service.DocumentService;
 import com.jesse.util.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;

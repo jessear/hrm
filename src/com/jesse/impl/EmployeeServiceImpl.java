@@ -1,11 +1,9 @@
 package com.jesse.impl;
 
 import com.jesse.bean.Employee;
-import com.jesse.dao.EmployeeDao;
 import com.jesse.mapper.EmployeeMapper;
 import com.jesse.service.EmployeeService;
 import com.jesse.util.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
