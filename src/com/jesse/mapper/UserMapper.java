@@ -11,9 +11,9 @@ public interface UserMapper {
     //根据登录名和密码查询员工
     User selectByLoginnameAndPassword(String loginname,String password);
     //根据id查询用户
-    User selectById(Integer id);
+    User selectById(String id);
     //根据id删除用户
-    void deleteById(Integer id);
+    void deleteById(String id);
     //动态修改用户
     void update(User user);
     //动态查询

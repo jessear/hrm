@@ -22,7 +22,7 @@ public interface UserService {
      * @param id
      * @return
      */
-    User findUserById(Integer id);
+    User findUserById(String id);
 
     /**
      * 分页获取所有用户
@@ -36,7 +36,7 @@ public interface UserService {
      * 根据id删除用户
      * @param id
      */
-    void removeUserById(Integer id);
+    void removeUserById(String id);
 
     /**
      * 修改用户

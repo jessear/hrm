@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User findUserById(Integer id) {
+    public User findUserById(String id) {
         return userMapper.selectById(id);
     }
     @Transactional(readOnly = true)
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUserById(Integer id) {
+    public void removeUserById(String id) {
         userMapper.deleteById(id);
     }
 

@@ -7,18 +7,18 @@ import java.util.Date;
  * Created by public1 on 2017/6/21.
  */
 public class User implements Serializable {
-    private Integer id;//id
+    private String id;//id
     private String username;//用户名
     private String loginname;//登录名
     private String password;//密码
     private Integer status;//状态
     private Date create_date;//建档日期
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -83,7 +83,7 @@ public class UserController {
     public ModelAndView removeUser(String ids,ModelAndView modelAndView){
         String[] idArray = ids.split(",");
         for(String id : idArray){
-            userService.removeUserById(Integer.parseInt(id));
+            userService.removeUserById(id);
         }
         modelAndView.setViewName("redirect:/user/selectUser");
         return modelAndView;
