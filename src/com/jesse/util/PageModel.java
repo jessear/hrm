@@ -66,7 +66,11 @@ public class PageModel {
         this.totalSize = totalSize;
     }
 
-    public int getFirstLimitParam(){
-        return (this.getPageIndex()-1)*this.getPageSize();
+    public int getPageTo(){
+        return this.getPageIndex()*this.getPageSize();
+    }
+
+    public int getPageFrom(){
+        return (this.getPageIndex()-1)*this.getPageSize()+1;
     }
 }

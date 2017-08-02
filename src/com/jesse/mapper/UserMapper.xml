@@ -8,11 +8,11 @@
   	select * from user_inf  where loginname=#{0} and password=#{1}
   </select>
 
-    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.User">
+    <select id="selectById" parameterType="java.lang.String" resultType="com.jesse.bean.User">
         select * from user_inf where id=#{id}
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteById" parameterType="java.lang.String">
         delete from user_inf where id=#{id}
     </delete>
 
@@ -29,19 +29,27 @@
     </update>
 
     <select id="selectByPage" parameterType="hashmap" resultMap="userMap">
-        select * from user_inf
+        SELECT * FROM(
+        SELECT u.*, ROWNUM RN FROM
+        (
+        SELECT * FROM USER_INF ORDER BY create_date
         <where>
             <if test="user != null">
                 <if test="user.username != null and user.username !=''">
-                    username LIKE CONCAT ('%',#{user.username},'%')
+                    username LIKE CONCAT (CONCAT('%',#{user.username}),'%')
                 </if>
                 <if test="user.status != null and user.status !=''">
-                    and status LIKE CONCAT ('%',#{user.status},'%')
+                    and status LIKE CONCAT (CONCAT('%',#{user.status}),'%')
                 </if>
             </if>
         </where>
+        ) u
+        <if test="pageModel == null">
+            )
+        </if>
         <if test="pageModel != null">
-            limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+          WHERE ROWNUM &lt;= #{pageModel.pageTo})
+          WHERE RN &gt;= #{pageModel.pageFrom}
         </if>
     </select>
 
@@ -59,27 +67,35 @@
         <where>
             <if test="user != null">
                 <if test="user.username != null and user.username !=''">
-                    username LIKE CONCAT ('%',#{user.username},'%')
+                    username LIKE CONCAT (CONCAT('%',#{user.username}),'%')
                 </if>
                 <if test="user.status != null and user.status !=''">
-                    and status LIKE CONCAT ('%',#{user.status},'%')
+                    and status LIKE CONCAT (CONCAT('%',#{user.status}),'%')
                 </if>
             </if>
         </where>
     </select>
 
     <insert id="save" parameterType="com.jesse.bean.User">
-        insert into user_inf <include refid="insertUser"/>
+        insert into user_inf (<include refid="insertUserKey"/>) values (<include refid="insertUserValue"/>)
     </insert>
 
-    <sql id="insertUser">
-        <set>
-            <if test="username != null">username= #{username},</if>
-            <if test="status != null">status= #{status},</if>
-            <if test="loginname != null">loginname= #{loginname},</if>
-            <if test="password != null">password= #{password},</if>
-            create_date=NOW()
-        </set>
+    <sql id="insertUserKey">
+        <trim suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="status != null">status,</if>
+            <if test="loginname != null">loginname,</if>
+            <if test="password != null">password,</if>
+        </trim>
+    </sql>
+
+    <sql id="insertUserValue">
+        <trim suffixOverrides=",">
+            <if test="username != null">#{username},</if>
+            <if test="status != null"> #{status},</if>
+            <if test="loginname != null">#{loginname},</if>
+            <if test="password != null">#{password},</if>
+        </trim>
     </sql>
 
 </mapper>
