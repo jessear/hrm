@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by public1 on 2017/6/21.
  */
 public class User implements Serializable {
-    private String id;//id
+    private String id;//用户id
     private String username;//用户名
     private String loginname;//登录名
     private String password;//密码

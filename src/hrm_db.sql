@@ -140,15 +140,15 @@ CREATE TABLE `notice_inf` (
 -- Table structure for user_inf
 -- ----------------------------
 DROP TABLE IF EXISTS `user_inf`;
-CREATE TABLE `user_inf` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `loginname` varchar(20) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  `create_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `username` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE user_inf (
+  id varchar2(32) DEFAULT sys_guid() NOT NULL,
+  loginname varchar2(20) NOT NULL,
+  password varchar2(16) NOT NULL,
+  status number(11) DEFAULT '1' NOT NULL,
+  create_date varchar2(20) DEFAULT TO_CHAR(sysdate,'yyyy-MM-dd HH:ss:mm') NOT NULL,
+  username varchar2(20) DEFAULT NULL,
+  PRIMARY KEY (id)
+)
 
 -- ----------------------------
 -- Records of user_inf
