@@ -43,7 +43,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void removeJobById(Integer id) {
+    public void removeJobById(String id) {
         jobMapper.deleteById(id);
     }
     @Transactional(readOnly = true)

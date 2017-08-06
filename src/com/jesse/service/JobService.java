@@ -28,7 +28,7 @@ public interface JobService {
      * 根据id删除职位
      * @param id
      */
-    void removeJobById(Integer id);
+    void removeJobById(String id);
 
     /**
      * 根据id查询职位

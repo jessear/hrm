@@ -39,7 +39,7 @@ public class JobController {
     public ModelAndView removeJob(String ids,ModelAndView modelAndView){
         String[] idArray=ids.split(",");
         for(String id : idArray){
-            jobService.removeJobById(Integer.parseInt(id));
+            jobService.removeJobById(id);
         }
         modelAndView.setViewName("redirect:/job/selectJob");
         return modelAndView;

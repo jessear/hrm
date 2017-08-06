@@ -40,7 +40,7 @@ public interface JobMapper {
      * 删除职位
      * @param id
      */
-    void deleteById(int id);
+    void deleteById(String id);
 
     /**
      * 插入职位

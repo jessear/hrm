@@ -86,12 +86,12 @@ INSERT INTO `employee_inf` VALUES ('1', '1', '8', '爱丽丝', '4328011988', '�
 -- Table structure for job_inf
 -- ----------------------------
 DROP TABLE IF EXISTS `job_inf`;
-CREATE TABLE `job_inf` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `remark` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+CREATE TABLE job_inf (
+  id varchar2(32) DEFAULT sys_guid() NOT NULL,
+  name varchar2(50) DEFAULT NULL,
+  remark varchar2(300) DEFAULT NULL,
+  PRIMARY KEY (id)
+)
 
 -- ----------------------------
 -- Records of job_inf
