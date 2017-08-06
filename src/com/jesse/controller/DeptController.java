@@ -54,7 +54,7 @@ public class DeptController {
     public ModelAndView removeDept(String ids,ModelAndView modelAndView){
         String[] idArray = ids.split(",");
         for(String id : idArray){
-            deptService.removeDeptById(Integer.parseInt(id));
+            deptService.removeDeptById(id);
         }
         modelAndView.setViewName("redirect:/dept/selectDept");
         return modelAndView;

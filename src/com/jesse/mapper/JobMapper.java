@@ -14,7 +14,7 @@ public interface JobMapper {
      * @param id
      * @return
      */
-    Job selectById(int id);
+    Job selectById(String id);
 
     /**
      * 查询所有职位

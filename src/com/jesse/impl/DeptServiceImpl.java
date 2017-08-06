@@ -43,12 +43,12 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public void removeDeptById(Integer id) {
+    public void removeDeptById(String id) {
         deptMapper.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
-    public Dept findDeptById(Integer id) {
+    public Dept findDeptById(String id) {
         return deptMapper.selectById(id);
     }
 

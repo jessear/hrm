@@ -6,15 +6,15 @@ import java.io.Serializable;
  * Created by public1 on 2017/6/21.
  */
 public class Job implements Serializable {
-    private Integer id;//id
+    private String id;//id
     private String name;//职位名称
     private String remark;//详细描述
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

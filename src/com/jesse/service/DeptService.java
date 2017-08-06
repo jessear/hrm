@@ -28,14 +28,14 @@ public interface DeptService {
      * 根据id删除部门
      * @param id
      */
-    void removeDeptById(Integer id);
+    void removeDeptById(String id);
 
     /**
      * 根据id查询部门
      * @param id
      * @return
      */
-    Dept findDeptById(Integer id);
+    Dept findDeptById(String id);
 
     /**
      * 添加部门

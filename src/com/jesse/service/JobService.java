@@ -35,7 +35,7 @@ public interface JobService {
      * @param id
      * @return
      */
-    Job findJobById(Integer id);
+    Job findJobById(String id);
 
     /**
      * 添加职位

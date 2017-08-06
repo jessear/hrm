@@ -4,7 +4,7 @@
 <!-- namespace指用户自定义的命名空间。 -->
 <mapper namespace="com.jesse.mapper.DeptMapper">
 
-    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.Dept">
+    <select id="selectById" parameterType="java.lang.String" resultType="com.jesse.bean.Dept">
         select * from dept_inf where id=#{id}
     </select>
 
@@ -12,7 +12,7 @@
         select * from dept_inf
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteById" parameterType="java.lang.String">
         delete from dept_inf where id=#{id}
     </delete>
 
@@ -26,35 +26,49 @@
     </update>
 
     <select id="selectByPage" parameterType="hashmap" resultType="com.jesse.bean.Dept">
-        select * from dept_inf
-            <if test="dept != null">
-                <if test="dept.name != null and dept.name !=''">
-                    where name LIKE CONCAT ('%',#{dept.name},'%')
-                </if>
+        SELECT * FROM(
+        SELECT d.*, ROWNUM RN FROM
+        (
+        SELECT * FROM dept_inf
+        <if test="dept != null">
+            <if test="dept.name != null and dept.name !=''">
+                where name LIKE CONCAT (CONCAT('%',#{dept.name}),'%')
             </if>
-            <if test="pageModel != null">
-                limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
-            </if>
+        </if>) d
+        <if test="pageModel == null">
+            )
+        </if>
+        <if test="pageModel != null">
+            WHERE ROWNUM &lt;= #{pageModel.pageTo})
+            WHERE RN &gt;= #{pageModel.pageFrom}
+        </if>
     </select>
 
     <select id="count" parameterType="hashmap" resultType="java.lang.Integer">
         select count(*) from dept_inf
         <if test="dept != null">
             <if test="dept.name != null and dept.name !=''">
-                where name LIKE CONCAT ('%',#{dept.name},'%')
+                where name LIKE CONCAT (CONCAT('%',#{dept.name}),'%')
             </if>
         </if>
     </select>
 
     <insert id="save" parameterType="com.jesse.bean.Dept">
-        insert into dept_inf <include refid="insertDept"/>
+        insert into dept_inf (<include refid="insertDeptKey"/>) values (<include refid="insertDeptValue"/>)
     </insert>
 
-    <sql id="insertDept">
-        <set>
-            <if test="name != null">name= #{name},</if>
-            <if test="remark != null">remark= #{remark}</if>
-        </set>
+    <sql id="insertDeptKey">
+        <trim suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+    </sql>
+
+    <sql id="insertDeptValue">
+        <trim suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="remark != null"> #{remark},</if>
+        </trim>
     </sql>
 
 </mapper>

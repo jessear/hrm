@@ -19,23 +19,12 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for dept_inf
 -- ----------------------------
 DROP TABLE IF EXISTS `dept_inf`;
-CREATE TABLE `dept_inf` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `remark` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of dept_inf
--- ----------------------------
-INSERT INTO `dept_inf` VALUES ('1', '技术部', '技术部');
-INSERT INTO `dept_inf` VALUES ('2', '运营部', '运营部');
-INSERT INTO `dept_inf` VALUES ('3', '财务部', '财务部');
-INSERT INTO `dept_inf` VALUES ('4', '总办公', '总办公');
-INSERT INTO `dept_inf` VALUES ('5', '市场部', '市场部');
-INSERT INTO `dept_inf` VALUES ('6', '教学部', '教学部');
-
+CREATE TABLE dept_inf (
+  id varchar2(32) DEFAULT sys_guid() NOT NULL,
+  name varchar2(50) NOT NULL,
+  remark varchar(300) DEFAULT NULL,
+  PRIMARY KEY (id)
+)
 -- ----------------------------
 -- Table structure for document_inf
 -- ----------------------------
@@ -150,7 +139,3 @@ CREATE TABLE user_inf (
   PRIMARY KEY (id)
 )
 
--- ----------------------------
--- Records of user_inf
--- ----------------------------
-INSERT INTO `user_inf` VALUES ('1', 'admin', '123456', '2', '2017-06-21 15:55:22', '超级管理员');

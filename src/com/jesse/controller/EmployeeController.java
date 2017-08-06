@@ -44,7 +44,7 @@ public class EmployeeController {
      */
     @RequestMapping(value = "/employee/selectEmployee")
     public String selectEmployee(Integer pageIndex,
-                                 Integer job_id, Integer dept_id,
+                                 String job_id, String dept_id,
                                  @ModelAttribute Employee employee,
                                  Model model){
         //模糊查询是判断是否有关联对象传递，如果有创建并封装关联对象
@@ -66,7 +66,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employee/addEmployee")
     public ModelAndView addEmployee(
             String flag,
-            Integer job_id,Integer dept_id,
+            String job_id,String dept_id,
             @ModelAttribute Employee employee,
             ModelAndView modelAndView){
         if(flag.equals("1")){
@@ -103,7 +103,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee/updateEmployee")
     public ModelAndView updateEmployee(String flag,
-                                       Integer job_id,Integer dept_id,
+                                       String job_id,String dept_id,
                                        @ModelAttribute Employee employee,
                                        ModelAndView modelAndView){
         if(flag.equals("1")){
@@ -131,7 +131,7 @@ public class EmployeeController {
      * @param dept_id
      * @param employee
      */
-    private void genericAssociation(Integer job_id,Integer dept_id,Employee employee){
+    private void genericAssociation(String job_id,String dept_id,Employee employee){
         if(job_id!=null){
             Job job = new Job();
             job.setId(job_id);

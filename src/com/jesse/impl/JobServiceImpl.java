@@ -48,7 +48,7 @@ public class JobServiceImpl implements JobService {
     }
     @Transactional(readOnly = true)
     @Override
-    public Job findJobById(Integer id) {
+    public Job findJobById(String id) {
         return jobMapper.selectById(id);
     }
 

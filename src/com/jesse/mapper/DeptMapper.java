@@ -15,9 +15,9 @@ public interface DeptMapper {
     //查询所有部门
     List<Dept> selectAllDept();
     //根据id查询部门
-    Dept selectById(int id);
+    Dept selectById(String id);
     //删除部门
-    void deleteById(int id);
+    void deleteById(String id);
     //动态插入部门
     void save(Dept dept);
     //动态修改部门
