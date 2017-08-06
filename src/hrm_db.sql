@@ -145,7 +145,7 @@ CREATE TABLE user_inf (
   loginname varchar2(20) NOT NULL,
   password varchar2(16) NOT NULL,
   status number(11) DEFAULT '1' NOT NULL,
-  create_date varchar2(20) DEFAULT TO_CHAR(sysdate,'yyyy-MM-dd HH:ss:mm') NOT NULL,
+  create_date varchar2(20) DEFAULT TO_CHAR(sysdate,'yyyy-mm-dd hh24:mi:ss') NOT NULL,
   username varchar2(20) DEFAULT NULL,
   PRIMARY KEY (id)
 )
