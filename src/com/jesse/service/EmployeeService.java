@@ -22,14 +22,14 @@ public interface EmployeeService {
      * 根据id删除员工
      * @param id
      */
-    void removeEmployeeById(Integer id);
+    void removeEmployeeById(String id);
 
     /**
      * 根据id查询用户
      * @param id
      * @return
      */
-    Employee findEmployeeById(Integer id);
+    Employee findEmployeeById(String id);
 
     /**
      * 添加员工

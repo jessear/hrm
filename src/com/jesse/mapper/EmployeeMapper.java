@@ -33,14 +33,14 @@ public interface EmployeeMapper {
      * 删除员工
      * @param id
      */
-    void deleteById(int id);
+    void deleteById(String id);
 
     /**
      * 根据id查询员工
      * @param id
      * @return
      */
-    Employee selectById(int id);
+    Employee selectById(String id);
 
     /**
      * 修改员工

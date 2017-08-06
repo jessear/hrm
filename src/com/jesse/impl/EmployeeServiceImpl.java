@@ -39,12 +39,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void removeEmployeeById(Integer id) {
+    public void removeEmployeeById(String id) {
         employeeMapper.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
-    public Employee findEmployeeById(Integer id) {
+    public Employee findEmployeeById(String id) {
         return employeeMapper.selectById(id);
     }
 

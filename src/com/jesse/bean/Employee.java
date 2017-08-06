@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Employee implements Serializable {
 
-    private Integer id;//id
+    private String id;//id
     private Dept dept;//员工关联的部门对象
     private Job job;//员工关联的职位对象
     private String name;//名称
@@ -32,11 +32,11 @@ public class Employee implements Serializable {
     private String remark;//备注
     private Date create_date;//建档日期
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -95,7 +95,7 @@ public class EmployeeController {
     public ModelAndView removeEmployee(String ids,ModelAndView modelAndView){
         String[] idArray=ids.split(",");
         for(String id :idArray){
-            employeeService.removeEmployeeById(Integer.parseInt(id));
+            employeeService.removeEmployeeById(id);
         }
         modelAndView.setViewName("redirect:/employee/selectEmployee");
         return modelAndView;
@@ -132,12 +132,12 @@ public class EmployeeController {
      * @param employee
      */
     private void genericAssociation(String job_id,String dept_id,Employee employee){
-        if(job_id!=null){
+        if(job_id!=null && !job_id.equals("0")){
             Job job = new Job();
             job.setId(job_id);
             employee.setJob(job);
         }
-        if(dept_id!=null){
+        if(dept_id!=null && !dept_id.equals("0")){
             Dept dept=new Dept();
             dept.setId(dept_id);
             employee.setDept(dept);
