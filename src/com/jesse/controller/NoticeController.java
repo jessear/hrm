@@ -52,7 +52,7 @@ public class NoticeController {
      * @return
      */
     @RequestMapping(value = "/notice/previewNotice")
-    public String previewNotice(Integer id,Model model){
+    public String previewNotice(String id,Model model){
         Notice notice=noticeService.findNoticeById(id);
         model.addAttribute("notice",notice);
         return "notice/previewNotice";
@@ -99,7 +99,7 @@ public class NoticeController {
     public ModelAndView removeNotice(String ids,ModelAndView modelAndView){
         String[] idArray=ids.split(",");
         for(String id :idArray){
-            noticeService.removeNoticeById(Integer.parseInt(id));
+            noticeService.removeNoticeById(id);
         }
         modelAndView.setViewName("redirect:/notice/selectNotice");
         return modelAndView;

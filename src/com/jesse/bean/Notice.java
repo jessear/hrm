@@ -7,17 +7,17 @@ import java.util.Date;
  * Created by public1 on 2017/6/21.
  */
 public class Notice implements Serializable {
-    private Integer id;//编号
+    private String id;//编号
     private String title;//标题
     private String content;//内容
     private Date create_date;//发布日期
     private User user;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

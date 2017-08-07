@@ -27,13 +27,13 @@ public interface NoticeMapper {
      * @param id
      * @return
      */
-    Notice selectById(Integer id);
+    Notice selectById(String id);
 
     /**
      * 删除公告
      * @param id
      */
-    void deleteById(Integer id);
+    void deleteById(String id);
 
     /**
      * 保存公告

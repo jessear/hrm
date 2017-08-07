@@ -21,14 +21,14 @@ public interface NoticeService {
      * 根据id删除通知
      * @param id
      */
-    void removeNoticeById(Integer id);
+    void removeNoticeById(String id);
 
     /**
      * 根据id查询通知
      * @param id
      * @return
      */
-    Notice findNoticeById(Integer id);
+    Notice findNoticeById(String id);
 
     /**
      * 添加通知
