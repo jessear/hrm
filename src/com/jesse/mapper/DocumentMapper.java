@@ -34,13 +34,13 @@ public interface DocumentMapper {
      * @param id
      * @return
      */
-    Document selectById(Integer id);
+    Document selectById(String id);
 
     /**
      * 删除文档
      * @param id
      */
-    void deleteById(Integer id);
+    void deleteById(String id);
 
     /**
      * 修改文档

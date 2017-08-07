@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by public1 on 2017/6/21.
  */
 public class Document implements Serializable {
-    private int id;//编号
+    private String id;//编号
     private String title;//标题
     private String filename;//文件名
     private MultipartFile file;//文件
@@ -17,11 +17,11 @@ public class Document implements Serializable {
     private Date create_date;//上传时间
     private User user;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

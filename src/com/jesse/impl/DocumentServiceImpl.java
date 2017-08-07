@@ -40,12 +40,12 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public void removeDocumentById(Integer id) {
+    public void removeDocumentById(String id) {
         documentMapper.deleteById(id);
     }
 
     @Override
-    public Document findDocumentById(Integer id) {
+    public Document findDocumentById(String id) {
         return documentMapper.selectById(id);
     }
 

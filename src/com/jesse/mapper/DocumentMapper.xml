@@ -4,11 +4,11 @@
 <!-- namespace指用户自定义的命名空间。 -->
 <mapper namespace="com.jesse.mapper.DocumentMapper">
 
-    <select id="selectById" parameterType="java.lang.Integer" resultType="com.jesse.bean.Document">
+    <select id="selectById" parameterType="java.lang.String" resultType="com.jesse.bean.Document">
         select * from document_inf where id=#{id}
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteById" parameterType="java.lang.String">
         delete from document_inf where id=#{id}
     </delete>
 
@@ -27,16 +27,24 @@
     </update>
 
     <select id="selectByPage" parameterType="hashmap" resultMap="documentMap">
-        select * from document_inf
+        SELECT * FROM(
+        SELECT d.*, ROWNUM RN FROM
+        (
+        SELECT * FROM document_inf
         <where>
             <if test="document != null">
                 <if test="document.title != null">
-                    title LIKE CONCAT ('%',#{document.title},'%')
+                    title LIKE CONCAT (CONCAT('%',#{document.title}),'%')
                 </if>
             </if>
         </where>
+        ORDER BY create_date)d
+        <if test="pageModel == null">
+            )
+        </if>
         <if test="pageModel != null">
-            limit #{pageModel.firstLimitParam},#{pageModel.pageSize}
+            WHERE ROWNUM &lt;= #{pageModel.pageTo})
+            WHERE RN &gt;= #{pageModel.pageFrom}
         </if>
     </select>
 
@@ -56,26 +64,32 @@
         <where>
             <if test="document != null">
                 <if test="document.title != null">
-                    title LIKE CONCAT ('%',#{document.title},'%')
+                    title LIKE CONCAT (CONCAT('%',#{document.title}),'%')
                 </if>
             </if>
         </where>
     </select>
 
     <insert id="save" parameterType="com.jesse.bean.Document">
-        insert into document_inf <include refid="insertDocument"/>
+        insert into document_inf (<include refid="insertDocumentKey"/>) values (<include refid="insertDocumentValue"/>)
     </insert>
 
-    <sql id="insertDocument">
-        <set>
-            <if test="title != null">title= #{title},</if>
-            <if test="filename != null">filename= #{filename},</if>
-            <if test="remark != null">remark= #{remark},</if>
-            <if test="user != null and user.id != null">
-                user_id=#{user.id},
-            </if>
-            create_date=NOW()
-        </set>
+    <sql id="insertDocumentKey">
+        <trim suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="filename != null">filename,</if>
+            <if test="remark != null">remark,</if>
+            <if test="user != null and user.id != null">user_id,</if>
+        </trim>
+    </sql>
+
+    <sql id="insertDocumentValue">
+        <trim suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="filename != null">#{filename},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="user != null and user.id != null">#{user.id},</if>
+        </trim>
     </sql>
 
 </mapper>

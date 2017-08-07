@@ -107,14 +107,14 @@ public class DocumentController {
     public ModelAndView removeDocument(String ids,ModelAndView modelAndView){
         String[] idArray=ids.split(",");
         for(String id :idArray){
-            documentService.removeDocumentById(Integer.parseInt(id));
+            documentService.removeDocumentById(id);
         }
         modelAndView.setViewName("redirect:/document/selectDocument");
         return modelAndView;
     }
 
     @RequestMapping(value = "/document/downLoad")
-    public ResponseEntity<byte[]> downLoad(Integer id,HttpSession httpSession) throws Exception {
+    public ResponseEntity<byte[]> downLoad(String id,HttpSession httpSession) throws Exception {
         //根据id查询文档
         Document target=documentService.findDocumentById(id);
         String fileName=target.getFilename();

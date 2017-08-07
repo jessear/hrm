@@ -22,14 +22,14 @@ public interface DocumentService {
      * 根据id删除文档
      * @param id
      */
-    void removeDocumentById(Integer id);
+    void removeDocumentById(String id);
 
     /**
      * 根据id查询文档
      * @param id
      * @return
      */
-    Document findDocumentById(Integer id);
+    Document findDocumentById(String id);
 
     /**
      * 添加文档
