@@ -1,7 +1,7 @@
 package com.jesse.impl;
 
 import com.jesse.bean.Job;
-import com.jesse.mapper.JobMapper;
+import com.jesse.dao.JobDao;
 import com.jesse.service.JobService;
 import com.jesse.util.PageModel;
 import org.springframework.stereotype.Service;
@@ -21,45 +21,45 @@ import java.util.Map;
 public class JobServiceImpl implements JobService {
 
     @Resource
-    JobMapper jobMapper;
+    JobDao jobDao;
 
     @Transactional(readOnly = true)
     @Override
     public List<Job> findJob(Job job, PageModel pageModel) {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("job",job);
-        int recordCount=jobMapper.count(params);
+        int recordCount=jobDao.count(params);
         pageModel.setRecordCount(recordCount);
         if(recordCount>0){
             params.put("pageModel",pageModel);
         }
-        List<Job> jobs=jobMapper.selectByPage(params);
+        List<Job> jobs=jobDao.selectByPage(params);
         return jobs;
     }
     @Transactional(readOnly = true)
     @Override
     public List<Job> findAllJob() {
-        return jobMapper.selectAllJob();
+        return jobDao.selectAllJob();
     }
 
     @Override
     public void removeJobById(String id) {
-        jobMapper.deleteById(id);
+        jobDao.deleteById(id);
     }
     @Transactional(readOnly = true)
     @Override
     public Job findJobById(String id) {
-        return jobMapper.selectById(id);
+        return jobDao.selectById(id);
     }
 
     @Override
     public void addJob(Job job) {
-        jobMapper.save(job);
+        jobDao.save(job);
     }
 
     @Override
     public void modifyJob(Job job) {
-        jobMapper.update(job);
+        jobDao.update(job);
     }
 
 }

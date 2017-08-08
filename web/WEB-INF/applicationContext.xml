@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 			            http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 			            http://www.springframework.org/schema/context
 			            http://www.springframework.org/schema/context/spring-context-4.2.xsd
@@ -16,32 +16,56 @@
 			            http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 			            http://mybatis.org/schema/mybatis-spring 
 			            http://mybatis.org/schema/mybatis-spring.xsd ">
-			      
 
-	 <!-- 扫描com.jesse包下面的java文件，有Spring的相关注解的类，则把这些类注册为Spring的bean -->
+
+    <!-- 扫描com.jesse包下面的java文件，有Spring的相关注解的类，则把这些类注册为Spring的bean -->
     <context:component-scan base-package="com.jesse"/>
-    
-	<!-- 使用PropertyOverrideConfigurer后处理器加载数据源参数 -->
-	<context:property-override location="classpath:db.properties"/>
 
-	<!-- 配置c3p0数据源 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
-	
-	<!-- 配置SqlSessionFactory，org.mybatis.spring.SqlSessionFactoryBean是Mybatis社区开发用于整合Spring的bean -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-	    p:dataSource-ref="dataSource"
-	    p:configLocation="classpath:mybatis-config.xml"
-	    p:mapperLocations="classpath:com/jesse/mapper/*.xml"/>
+    <!-- 使用PropertyOverrideConfigurer后处理器加载数据源参数 -->
+    <context:property-override location="classpath:db.properties"/>
 
-	<!-- spring与mybatis整合配置，扫描所有dao -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.jesse.mapper"
-		  p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
-	
-	<!-- JDBC事务管理器 -->
-	<bean id="transactionManager" 
-	class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
-	
-	<!-- 启用支持annotation注解方式事务管理 -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
+    <!-- 配置c3p0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
+
+    <!-- 配置SqlSessionFactory，org.mybatis.spring.SqlSessionFactoryBean是Mybatis社区开发用于整合Spring的bean -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"-->
+    <!--p:dataSource-ref="dataSource"-->
+    <!--p:configLocation="classpath:mybatis-config.xml"-->
+    <!--p:mapperLocations="classpath:com/jesse/mapper/*.xml"/>-->
+
+    <!--&lt;!&ndash; spring与mybatis整合配置，扫描所有dao &ndash;&gt;-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.jesse.mapper"-->
+    <!--p:sqlSessionFactoryBeanName="sqlSessionFactory"/>-->
+    <!---->
+    <!--&lt;!&ndash; JDBC事务管理器 &ndash;&gt;-->
+    <!--<bean id="transactionManager" -->
+    <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>-->
+
+    <bean class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" id="sessionFactory">
+        <!-- 配置数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 找到实体包(pojo) -->
+        <property name="namingStrategy">
+            <bean class="org.hibernate.cfg.ImprovedNamingStrategy"></bean>
+        </property>
+        <property name="packagesToScan" value="com.jesse.bean"></property>
+
+        <property name="hibernateProperties">
+            <props>
+                <!-- 数据库的方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!--&lt;!&ndash; 启用支持annotation注解方式事务管理 &ndash;&gt;-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
 </beans>

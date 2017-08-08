@@ -1,17 +1,28 @@
 package com.jesse.bean;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by public1 on 2017/6/21.
  */
+@Entity
+@Table(name="user_inf")
 public class User implements Serializable {
+    @Id
+    @GeneratedValue
     private String id;//用户id
+    @Column(name = "username")
     private String username;//用户名
+    @Column(name = "loginname")
     private String loginname;//登录名
+    @Column(name = "password")
     private String password;//密码
+    @Column(name = "status")
     private Integer status;//状态
+    @Column(name = "create_date")
     private Date create_date;//建档日期
 
     public String getId() {
