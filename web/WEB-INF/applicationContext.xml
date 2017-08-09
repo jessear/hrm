@@ -5,7 +5,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 			            http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 			            http://www.springframework.org/schema/context
@@ -15,7 +15,7 @@
 			            http://www.springframework.org/schema/tx
 			            http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 			            http://mybatis.org/schema/mybatis-spring 
-			            http://mybatis.org/schema/mybatis-spring.xsd ">
+			            http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <!-- 扫描com.jesse包下面的java文件，有Spring的相关注解的类，则把这些类注册为Spring的bean -->
@@ -65,7 +65,29 @@
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    <!--&lt;!&ndash; 启用支持annotation注解方式事务管理 &ndash;&gt;-->
+
+    <!-- 配置事务异常封装 -->
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+    <!-- 启用支持annotation注解方式事务管理 -->
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+      声明式容器事务管理 ,transaction-manager指定事务管理器为transactionManager
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="modif*" propagation="REQUIRED" />
+            <tx:method name="remove*" propagation="REQUIRED" />
+            <tx:method name="*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config expose-proxy="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.jesse.service..*.*(..))" />
+        <!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
 
 </beans>

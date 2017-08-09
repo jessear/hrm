@@ -1,6 +1,8 @@
 package com.jesse.bean;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +14,8 @@ import java.util.Date;
 @Table(name="user_inf")
 public class User implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
     private String id;//用户id
     @Column(name = "username")
     private String username;//用户名

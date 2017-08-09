@@ -1,35 +1,60 @@
 package com.jesse.bean;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by public1 on 2017/6/21.
  */
+@Entity
+@Table(name="employee_inf")
 public class Employee implements Serializable {
-
+    @Id
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
     private String id;//id
+    @Column(name = "dept_id")
     private Dept dept;//员工关联的部门对象
+    @Column(name = "job_id")
     private Job job;//员工关联的职位对象
+    @Column(name = "name")
     private String name;//名称
+    @Column(name = "cardId")
     private String cardId;//身份证
+    @Column(name = "address")
     private String address;//地址
+    @Column(name = "postCode")
     private String postCode;//邮政编码
+    @Column(name = "tel")
     private String tel;//电话
+    @Column(name = "phone")
     private String phone;//手机
+    @Column(name = "qqNum")
     private String qqNum;//qq
+    @Column(name = "email")
     private String email;//邮箱
+    @Column(name = "sex")
     private Integer sex;//性别
+    @Column(name = "party")
     private String party;//政治面貌
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birthday")
     private Date birthday;//生日
+    @Column(name = "race")
     private String race;//名族
+    @Column(name = "education")
     private String education;//学历
+    @Column(name = "speciality")
     private String speciality;//专业
+    @Column(name = "hobby")
     private String hobby;//爱好
+    @Column(name = "remark")
     private String remark;//备注
+    @Column(name = "create_date")
     private Date create_date;//建档日期
 
     public String getId() {
