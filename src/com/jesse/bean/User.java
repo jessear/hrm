@@ -24,8 +24,8 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;//密码
     @Column(name = "status")
-    private Integer status;//状态
-    @Column(name = "create_date")
+    private String status;//状态
+    @Column(name = "create_date",insertable = false,updatable = false)
     private Date create_date;//建档日期
 
     public String getId() {
@@ -60,11 +60,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

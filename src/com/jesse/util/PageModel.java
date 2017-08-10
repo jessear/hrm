@@ -71,6 +71,6 @@ public class PageModel {
     }
 
     public int getPageFrom(){
-        return (this.getPageIndex()-1)*this.getPageSize()+1;
+        return (this.getPageIndex()-1)*this.getPageSize();
     }
 }
