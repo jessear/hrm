@@ -11,7 +11,7 @@ public class User implements Serializable {
     private String username;//用户名
     private String loginname;//登录名
     private String password;//密码
-    private Integer status;//状态
+    private String status;//状态
     private Date create_date;//建档日期
 
     public String getId() {
@@ -46,11 +46,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
