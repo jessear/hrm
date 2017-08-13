@@ -7,7 +7,6 @@ import com.jesse.util.PageModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +66,7 @@ public class DeptDaoImpl implements DeptDao {
 
     @Override
     public List<Dept> selectAllDept() {
-        Criteria criteria =getCurrentSession().createCriteria (User.class);
+        Criteria criteria =getCurrentSession().createCriteria (Dept.class);
         return criteria.list();
     }
 
