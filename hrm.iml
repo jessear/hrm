@@ -23,5 +23,10 @@
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="javax.annotation" level="project" />
     <orderEntry type="library" name="javax.transaction" level="project" />
+    <orderEntry type="library" name="ojdbc6" level="project" />
+    <orderEntry type="library" name="dom4j-1.6.1" level="project" />
+    <orderEntry type="library" name="jboss-logging-3.1.0.GA" level="project" />
+    <orderEntry type="library" name="slf4j-all-log4j12-1.4.3" level="project" />
+    <orderEntry type="library" name="commons-collections" level="project" />
   </component>
 </module>

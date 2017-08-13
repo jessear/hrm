@@ -54,7 +54,7 @@ public class Employee implements Serializable {
     private String hobby;//爱好
     @Column(name = "remark")
     private String remark;//备注
-    @Column(name = "create_date")
+    @Column(name = "create_date",insertable = false,updatable = false)
     private Date create_date;//建档日期
 
     public String getId() {

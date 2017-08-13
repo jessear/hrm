@@ -20,7 +20,7 @@ public class Notice implements Serializable {
     private String title;//标题
     @Column(name = "content")
     private String content;//内容
-    @Column(name = "create_date")
+    @Column(name = "create_date" ,insertable = false,updatable = false)
     private Date create_date;//发布日期
     @Column(name = "user_id")
     private User user;

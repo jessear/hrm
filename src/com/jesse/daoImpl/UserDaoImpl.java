@@ -21,17 +21,13 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private Session getSession() {
-        return this.sessionFactory.openSession();
-    }
-
     private Session getCurrentSession(){
         return this.sessionFactory.getCurrentSession();
     }
 
     @Override
     public User selectByLoginnameAndPassword(String loginname, String password) {
-        Query query = getSession().createQuery ("from User as u where u.loginname=:loginname and u.password=:password");
+        Query query = getCurrentSession().createQuery ("from User as u where u.loginname=:loginname and u.password=:password");
         query.setString("loginname",loginname);
         query.setString("password",password);
         return (User) query.uniqueResult();
@@ -39,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User selectById(String id) {
-        return (User) getSession().get(User.class,id);
+        return (User) getCurrentSession().get(User.class,id);
     }
 
     @Override
@@ -56,7 +52,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> selectByPage(Map<String, Object> params) {
-        Criteria criteria =getSession().createCriteria (User.class);
+        Criteria criteria =getCurrentSession().createCriteria (User.class);
         if(params.containsKey("user")){
             User user= (User) params.get("user");
             if(user !=null){
@@ -79,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer count(Map<String, Object> params) {
-        Criteria criteria =getSession().createCriteria (User.class);
+        Criteria criteria =getCurrentSession().createCriteria (User.class);
         criteria.setProjection(Projections.rowCount());
         if(params.containsKey("user")){
             User user= (User) params.get("user");

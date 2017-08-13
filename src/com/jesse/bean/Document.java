@@ -25,7 +25,7 @@ public class Document implements Serializable {
     private MultipartFile file;//文件
     @Column(name = "remark")
     private String remark;//描述
-    @Column(name = "create_date")
+    @Column(name = "create_date" ,insertable = false,updatable = false)
     private Date create_date;//上传时间
     @Column(name = "user_id")
     private User user;
