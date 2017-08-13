@@ -27,7 +27,8 @@ public class Document implements Serializable {
     private String remark;//描述
     @Column(name = "create_date" ,insertable = false,updatable = false)
     private Date create_date;//上传时间
-    @Column(name = "user_id")
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name ="user_id")
     private User user;
 
     public String getId() {

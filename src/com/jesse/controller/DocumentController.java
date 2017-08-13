@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -66,23 +65,8 @@ public class DocumentController {
         if(flag.equals("1")){
             modelAndView.setViewName("document/showAddDocument");
         }else{
-            //上传文件路径
-            String path=session.getServletContext().getRealPath("/upload/");
-            //上传文件名
-            String fileName=document.getFile().getOriginalFilename();
-            //将上传文件保存到目标文件中
-            File file=new File(path+File.separator+fileName);
-            if(!file.getParentFile().exists()){
-                file.getParentFile().mkdirs();
-            }
-            document.getFile().transferTo(file);
-            //设置filename
-            document.setFilename(fileName);
-            //设置关联User对象
-            User user= (User) session.getAttribute(HrmConstants.USER_SESSION);
-            document.setUser(user);
             //插入数据库
-            documentService.addDocument(document);
+            documentService.addDocument(setDocumentParm(session,document));
             modelAndView.setViewName("redirect:/document/selectDocument");
         }
         return modelAndView;
@@ -91,13 +75,13 @@ public class DocumentController {
 
     @RequestMapping(value = "/document/updateDocument")
     public ModelAndView updateDocument(String flag, @ModelAttribute Document document,
-                                  ModelAndView modelAndView){
+                                  ModelAndView modelAndView, HttpSession session) throws IOException {
         if(flag.equals("1")){
             Document target=documentService.findDocumentById(document.getId());
             modelAndView.addObject("document",target);
             modelAndView.setViewName("document/showUpdateDocument");
         }else{
-            documentService.modifyDocument(document);
+            documentService.modifyDocument(setDocumentParm(session,document));
             modelAndView.setViewName("redirect:/document/selectDocument");
         }
         return modelAndView;
@@ -132,6 +116,32 @@ public class DocumentController {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         //201 HttpStatus.CREATED
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers, HttpStatus.CREATED);
+    }
+
+    /**
+     * 封装参数
+     * @param session
+     * @param document
+     * @return
+     * @throws IOException
+     */
+    private Document setDocumentParm(HttpSession session, Document document) throws IOException {
+        //上传文件路径
+        String path=session.getServletContext().getRealPath("/upload/");
+        //上传文件名
+        String fileName=document.getFile().getOriginalFilename();
+        //将上传文件保存到目标文件中
+        File file=new File(path+File.separator+fileName);
+        if(!file.getParentFile().exists()){
+            file.getParentFile().mkdirs();
+        }
+        document.getFile().transferTo(file);
+        //设置filename
+        document.setFilename(fileName);
+        //设置关联User对象
+        User user= (User) session.getAttribute(HrmConstants.USER_SESSION);
+        document.setUser(user);
+        return document;
     }
 
 }

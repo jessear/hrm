@@ -18,11 +18,14 @@ public class Notice implements Serializable {
     private String id;//编号
     @Column(name = "title")
     private String title;//标题
-    @Column(name = "content")
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
+    @Column(name = "content",columnDefinition="CLOB")
     private String content;//内容
     @Column(name = "create_date" ,insertable = false,updatable = false)
     private Date create_date;//发布日期
-    @Column(name = "user_id")
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name ="user_id")
     private User user;
 
     public String getId() {
