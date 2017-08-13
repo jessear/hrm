@@ -795,7 +795,7 @@
       <workItem from="1502367374307" duration="10900000" />
       <workItem from="1502378361938" duration="98000" />
       <workItem from="1502378636102" duration="325000" />
-      <workItem from="1502627065444" duration="2833000" />
+      <workItem from="1502627065444" duration="2902000" />
     </task>
     <task id="LOCAL-00001" summary="添加controller">
       <created>1498464215922</created>
@@ -944,11 +944,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502629893471</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="删除多余的引用">
+      <created>1502630011781</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1502630011781</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121029000" />
+    <option name="totallyTimeSpent" value="121098000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1080,7 +1087,6 @@
     <MESSAGE value="还原项目" />
     <MESSAGE value="注解方式完成" />
     <MESSAGE value="添加usermapper代码" />
-    <MESSAGE value="删除多余的引用" />
     <MESSAGE value="更换oracle数据库" />
     <MESSAGE value="oracle sql语句" />
     <MESSAGE value="完成用户操作oracle代码" />
@@ -1096,7 +1102,8 @@
     <MESSAGE value="提交用户hibernate代码" />
     <MESSAGE value="修复bug" />
     <MESSAGE value="卡顿bug修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="卡顿bug修复" />
+    <MESSAGE value="删除多余的引用" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除多余的引用" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
