@@ -28,7 +28,7 @@ public class Document implements Serializable {
     @Column(name = "create_date" ,insertable = false,updatable = false)
     private Date create_date;//上传时间
     @ManyToOne(cascade=CascadeType.REFRESH)
-    @JoinColumn(name ="user_id",referencedColumnName="id",updatable=false,insertable=false,nullable=true)
+    @JoinColumn(name ="user_id")
     private User user;
 
     public String getId() {
