@@ -17,28 +17,30 @@ public class Employee implements Serializable {
     @GeneratedValue(generator="system_uuid")
     @GenericGenerator(name="system_uuid",strategy="uuid")
     private String id;//id
-    @Column(name = "dept_id")
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name ="dept_id")
     private Dept dept;//员工关联的部门对象
-    @Column(name = "job_id")
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name ="job_id")
     private Job job;//员工关联的职位对象
     @Column(name = "name")
     private String name;//名称
-    @Column(name = "cardId")
+    @Column(name = "card_id")
     private String cardId;//身份证
     @Column(name = "address")
     private String address;//地址
-    @Column(name = "postCode")
+    @Column(name = "post_code")
     private String postCode;//邮政编码
     @Column(name = "tel")
     private String tel;//电话
     @Column(name = "phone")
     private String phone;//手机
-    @Column(name = "qqNum")
+    @Column(name = "qq_num")
     private String qqNum;//qq
     @Column(name = "email")
     private String email;//邮箱
     @Column(name = "sex")
-    private Integer sex;//性别
+    private String sex;//性别
     @Column(name = "party")
     private String party;//政治面貌
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -145,11 +147,11 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
