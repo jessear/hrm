@@ -53,9 +53,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
                     criteria.add(Restrictions.like("phone","%"+employee.getPhone()+"%"));
                 }
 
-//                if(employee.getCardId()!=null && !employee.getCardId().equals("")){
-//                    criteria.add(Restrictions.like("card_id","%"+employee.getCardId()+"%"));
-//                }
+                if(employee.getCard_id()!=null && !employee.getCard_id().equals("")){
+                    criteria.add(Restrictions.like("card_id","%"+employee.getCard_id()+"%"));
+                }
 
                 if(employee.getSex()!=null && !employee.getSex().equals("") && !employee.getSex().equals("0")){
                     criteria.add(Restrictions.like("sex","%"+employee.getSex()+"%"));
@@ -90,9 +90,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
                     criteria.add(Restrictions.like("phone","%"+employee.getPhone()+"%"));
                 }
 
-//                if(employee.getCardId()!=null && !employee.getCardId().equals("")){
-//                    criteria.add(Restrictions.like("card_id","%"+employee.getCardId()+"%"));
-//                }
+                if(employee.getCard_id()!=null && !employee.getCard_id().equals("")){
+                    criteria.add(Restrictions.like("card_id","%"+employee.getCard_id()+"%"));
+                }
 
                 if(employee.getSex()!=null && !employee.getSex().equals("") && !employee.getSex().equals("0")){
                     criteria.add(Restrictions.like("sex","%"+employee.getSex()+"%"));

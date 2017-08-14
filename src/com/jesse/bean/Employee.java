@@ -26,7 +26,7 @@ public class Employee implements Serializable {
     @Column(name = "name")
     private String name;//名称
     @Column(name = "card_id")
-    private String cardId;//身份证
+    private String card_id;//身份证 注解必须与字段名相同
     @Column(name = "address")
     private String address;//地址
     @Column(name = "post_code")
@@ -91,12 +91,12 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public String getCardId() {
-        return cardId;
+    public String getCard_id() {
+        return card_id;
     }
 
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
+    public void setCard_id(String card_id) {
+        this.card_id = card_id;
     }
 
     public String getAddress() {

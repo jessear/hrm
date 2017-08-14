@@ -97,7 +97,7 @@
 					    			</c:forEach>
 					    		</select>
 					    	姓名：<input type="text" name="name">
-					    	身份证号码：<input type="text" name="cardId" maxlength="18">
+					    	身份证号码：<input type="text" name="card_id" maxlength="18">
 					    </td>
 					  </tr>
 					  <tr>
@@ -159,7 +159,7 @@
 					  <td>${employee.email }</td>
 					  <td>${employee.job.name }</td>
 					  <td>${employee.education }</td>
-					  <td>${employee.cardId }</td>
+					  <td>${employee.card_id}</td>
 					  <td>${employee.dept.name }</td>
 					  <td>${employee.address }</td>
 					  <td>
