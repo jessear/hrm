@@ -30,13 +30,13 @@ public class Employee implements Serializable {
     @Column(name = "address")
     private String address;//地址
     @Column(name = "post_code")
-    private String postCode;//邮政编码
+    private String post_code;//邮政编码
     @Column(name = "tel")
     private String tel;//电话
     @Column(name = "phone")
     private String phone;//手机
     @Column(name = "qq_num")
-    private String qqNum;//qq
+    private String qq_num;//qq
     @Column(name = "email")
     private String email;//邮箱
     @Column(name = "sex")
@@ -107,14 +107,6 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-
     public String getTel() {
         return tel;
     }
@@ -129,14 +121,6 @@ public class Employee implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getQqNum() {
-        return qqNum;
-    }
-
-    public void setQqNum(String qqNum) {
-        this.qqNum = qqNum;
     }
 
     public String getEmail() {
@@ -217,5 +201,21 @@ public class Employee implements Serializable {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public String getPost_code() {
+        return post_code;
+    }
+
+    public void setPost_code(String post_code) {
+        this.post_code = post_code;
+    }
+
+    public String getQq_num() {
+        return qq_num;
+    }
+
+    public void setQq_num(String qq_num) {
+        this.qq_num = qq_num;
     }
 }

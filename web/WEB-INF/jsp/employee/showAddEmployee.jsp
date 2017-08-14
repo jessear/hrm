@@ -28,15 +28,15 @@
 	    	/** 员工表单提交 */
 			$("#employeeForm").submit(function(){
 				var name = $("#name");
-				var cardId = $("#cardId");
+				var card_id = $("#card_id");
 				var education = $("#education");
 				var email = $("#email");
 				var phone = $("#phone");
 				var tel = $("#tel");
 				var party = $("#party");
-				var qqNum = $("#qqNum");
+				var qq_num = $("#qq_num");
 				var address = $("#address");
-				var postCode = $("#postCode");
+				var post_code = $("#post_code");
 				var birthday = $("#birthday");
 				var race = $("#race");
 				var speciality = $("#speciality");
@@ -45,12 +45,12 @@
 				if ($.trim(name.val()) == ""){
 					msg = "姓名不能为空！";
 					name.focus();
-				}else if ($.trim(cardId.val()) == ""){
+				}else if ($.trim(card_id.val()) == ""){
 					msg = "身份证号码不能为空！";
-					cardId.focus();
-				}else if (!/^[1-9]\d{16}[0-9A-Za-z]$/.test($.trim(cardId.val()))){
+					card_id.focus();
+				}else if (!/^[1-9]\d{16}[0-9A-Za-z]$/.test($.trim(card_id.val()))){
 					msg = "身份证号码格式不正确！";
-					cardId.focus();
+					card_id.focus();
 				}else if ($.trim(education.val()) == ""){
 					msg = "学历不能为空！";
 					education.focus();
@@ -75,21 +75,21 @@
 				}else if ($.trim(party.val()) == ""){
 					msg = "政治面貌不能为空！";
 					party.focus();
-				}else if ($.trim(qqNum.val()) == ""){
+				}else if ($.trim(qq_num.val()) == ""){
 					msg = "QQ号码不能为空！";
-					qqNum.focus();
-				}else if (!/^\d{6,}$/.test($.trim(qqNum.val()))){
+					qq_num.focus();
+				}else if (!/^\d{6,}$/.test($.trim(qq_num.val()))){
 					msg = "QQ号码格式不正确！";
-					qqNum.focus();
+					qq_num.focus();
 				}else if ($.trim(address.val()) == ""){
 					msg = "地址不能为空！";
 					address.focus();
-				}else if ($.trim(postCode.val()) == ""){
+				}else if ($.trim(post_code.val()) == ""){
 					msg = "邮政编码不能为空！";
-					postCode.focus();
-				}else if (!/^[1-9]\d{5}$/.test($.trim(postCode.val()))){
+					post_code.focus();
+				}else if (!/^[1-9]\d{5}$/.test($.trim(post_code.val()))){
 					msg = "邮政编码格式不正确！";
-					postCode.focus();
+					post_code.focus();
 				}else if ($.trim(birthday.val()) == ""){
 					msg = "出生日期不能为空！";
 					birthday.focus();
@@ -140,7 +140,7 @@
 		    	<table>
 		    		<tr>
 		    			<td class="font3 fftd">姓名：<input type="text" name="name" id="name" size="20"/></td>
-		    			<td class="font3 fftd">身份证号码：<input type="text" name="cardId" id="cardId" size="20"/></td>
+		    			<td class="font3 fftd">身份证号码：<input type="text" name="card_id" id="card_id" size="20"/></td>
 		    		</tr>
 		    		<tr>
 		    			<td class="font3 fftd">性别：
@@ -174,7 +174,7 @@
 			<tr>
 				<td class="font3 fftd">
 					政治面貌：<input name="party" id="party" size="40"/>&nbsp;&nbsp;
-					QQ&nbsp;&nbsp;号码：<input name="qqNum" id="qqNum" size="20"/>
+					QQ&nbsp;&nbsp;号码：<input name="qq_num" id="qq_num" size="20"/>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
@@ -182,7 +182,7 @@
 			<tr>
 				<td class="font3 fftd">
 					联系地址：<input name="address" id="address" size="40"/>&nbsp;&nbsp;
-					邮政编码：<input name="postCode" id="postCode" size="20"/>
+					邮政编码：<input name="post_code" id="post_code" size="20"/>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
