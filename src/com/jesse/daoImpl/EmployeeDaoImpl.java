@@ -37,12 +37,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
             if(employee !=null){
                 if(employee.getDept()!=null){
                     if(employee.getDept().getId()!=null && !employee.getDept().getId().equals("")){
-                        criteria.add(Restrictions.like("dept_id","%"+employee.getDept().getId()+"%"));
+                        criteria.add(Restrictions.like("dept.id","%"+employee.getDept().getId()+"%"));
                     }
                 }
                 if(employee.getJob()!=null){
                     if(employee.getJob().getId()!=null && !employee.getJob().getId().equals("")){
-                        criteria.add(Restrictions.like("job_id","%"+employee.getJob().getId()+"%"));
+                        criteria.add(Restrictions.like("job.id","%"+employee.getJob().getId()+"%"));
                     }
                 }
                 if(employee.getName()!=null && !employee.getName().equals("")){
@@ -74,12 +74,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
             if(employee !=null){
                 if(employee.getDept()!=null){
                     if(employee.getDept().getId()!=null && !employee.getDept().getId().equals("")){
-                        criteria.add(Restrictions.like("dept_id","%"+employee.getDept().getId()+"%"));
+                        criteria.add(Restrictions.like("dept.id","%"+employee.getDept().getId()+"%"));//HQL是面向对象的语句所以这边的key要对象.属性才对，这里折腾了我好长时间
                     }
                 }
                 if(employee.getJob()!=null){
                     if(employee.getJob().getId()!=null && !employee.getJob().getId().equals("")){
-                        criteria.add(Restrictions.like("job_id","%"+employee.getJob().getId()+"%"));
+                        criteria.add(Restrictions.like("job.id","%"+employee.getJob().getId()+"%"));
                     }
                 }
                 if(employee.getName()!=null && !employee.getName().equals("")){

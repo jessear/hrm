@@ -18,10 +18,10 @@ public class Employee implements Serializable {
     @GenericGenerator(name="system_uuid",strategy="uuid")
     private String id;//id
     @ManyToOne(cascade=CascadeType.REFRESH)
-    @JoinColumn(name ="dept_id")
+    @JoinColumn(name ="dept_id",referencedColumnName="id",updatable=false,insertable=false,nullable=true)
     private Dept dept;//员工关联的部门对象
     @ManyToOne(cascade=CascadeType.REFRESH)
-    @JoinColumn(name ="job_id")
+    @JoinColumn(name ="job_id",referencedColumnName="id",updatable=false,insertable=false,nullable=true)
     private Job job;//员工关联的职位对象
     @Column(name = "name")
     private String name;//名称
