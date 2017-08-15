@@ -91,4 +91,33 @@
         <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
     </aop:config>
 
+    <!-- 定义定时任务 -->
+
+    <bean id="mytask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean class="com.jesse.task.MyTask" />
+        </property>
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" /><!-- 作业不并发调度 -->
+    </bean>
+
+    <!--  调度触发器  -->
+
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="mytask" />
+        <property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->
+        <property name="repeatInterval" value="10000" /><!-- 每10秒调度一次 -->
+    </bean>
+
+    <!-- ======================== 调度工厂 ======================== -->
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger" />
+            </list>
+        </property>
+    </bean>
+
 </beans>
