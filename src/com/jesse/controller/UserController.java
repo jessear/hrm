@@ -1,5 +1,6 @@
 package com.jesse.controller;
 
+import com.jesse.bean.Result;
 import com.jesse.bean.User;
 import com.jesse.common.HrmConstants;
 import com.jesse.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -55,7 +57,6 @@ public class UserController {
      * 查询用户
      * @param pageIndex
      * @param user
-     * @param model
      * @return
      */
     @RequestMapping(value = "user/selectUser")
@@ -72,6 +73,22 @@ public class UserController {
         model.addAttribute("pageModel",pageModel);
         return "user/user";
     }
+
+//    @RequestMapping(value = "user/selectUser")
+//    public @ResponseBody Result selectUser(Integer pageIndex,
+//                          @ModelAttribute User user){
+//        PageModel pageModel=new PageModel();
+//        if(pageIndex!=null){
+//            pageModel.setPageIndex(pageIndex);
+//        }
+//        //查询用户信息
+//        List<User> users=userService.findUser(user,pageModel);
+//        Result result =new Result();
+//        result.setCode(0);
+//        result.setMsg("查询成功");
+//        result.setResult(users);
+//        return result;
+//    }
 
     /**
      * 删除用户

@@ -17,9 +17,9 @@ public class MyTask {
     private UserService userService;
 
     public void execute(){
-        List<User> users=userService.findUser(null,null);
-        for(User user :users){
-            System.out.println(user.getUsername());
-        }
+//        List<User> users=userService.findUser(null,null);
+//        for(User user :users){
+//            System.out.println(user.getUsername());
+//        }
     }
 }
