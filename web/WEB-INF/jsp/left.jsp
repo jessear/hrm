@@ -92,6 +92,15 @@
 			</td>
 		  </tr>
 		  <tr><td height="2"></td></tr>
+
+			<%--<tr><td id="navbg6" class="left_nav_closed" onClick="showsubmenu(6)"><div class="font1">我的宝贝</div></td></tr>--%>
+			<%--<tr valign="top" id="submenu6" style="display: none">--%>
+				<%--<td class="left_nav_bgshw tdbtmline" height="50">--%>
+					<%--<p class="left_nav_link"><img src="${ctx}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${ctx }/document/selectDocument" target="main">展业1</a></img></p>--%>
+					<%--<p class="left_nav_link"><img src="${ctx}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${ctx }/document/addDocument?flag=1" target="main">展业2</a></img></p>--%>
+				<%--</td>--%>
+			<%--</tr>--%>
+			<%--<tr><td height="2"></td></tr>--%>
 		 
 		  <tr valign="top"><td height="100%" align="center"><div class="copycct"><br /><strong>技术支持：</strong><br><strong>广东为学教育有限公司</strong><br>Http://www.fkjava.org</div></td></tr>
 		  <tr><td height="10"><img src="${ctx}/images/left_nav_bottom.gif" height="10"></img></td></tr>
